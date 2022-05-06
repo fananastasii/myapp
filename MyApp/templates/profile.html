@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block buttons %}
+<div class="buttons">
+  <a class="button is-light" href="{{url_for('logout')}}">
+    Log out
+  </a>
+</div>
+{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="columns is-vcentered"> 
+    <div class="column is-narrow"> 
+        <figure class="image is-128x128">
+            <img class="is-rounded" src="{{url_for('static', filename=profile['picture'])}}">
+          </figure>
+        </div>
+          <div class="column">
+            <h1 class="title">{{profile['name']}} {{profile['last_name']}}</h1>
+            <h2 class="subtitle">
+              {{profile['position']}}
+            </h2>
+          </div> 
+        </div> 
+      </section>
+        <section class="section">
+        <div class="columns">
+          <div class="column">
+            Experience
+            {% for company in profile['experience'] %}
+            <li><a href="{{url_for('company', company_id=company['company_id'])}}">{{company['company_name']}}</a></li>
+            {% endfor %}
+            </div>
+          <div class="column">
+            Skills
+          </div>
+          <div class="column">
+            References
+          </div>
+        </div>
+  </section>
+{% endblock %}
